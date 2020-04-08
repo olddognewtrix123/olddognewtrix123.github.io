@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 
-
+  <title>Interval - a speed-reading app</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
 <style>
 
 html {
@@ -26,6 +27,16 @@ container{
 }
 
 #buffer {
+  background:Gainsboro; 
+  padding-top: 30px;
+}
+	
+	#buffer1 {
+  background:Gainsboro; 
+  padding-top: 30px;
+}
+	
+	#buffer2 {
   background:Gainsboro; 
   padding-top: 30px;
 }
@@ -171,8 +182,8 @@ footer {
 
  	 	<div id="goesontop">
 			  <div><button class = "button" onclick="showDirections()">Directions hello</button></div>
-			  <div id="buffer"><div>
-			  <div><input type="file" id="filechoice" ></input></div>
+			  <div id="buffer1"><div>
+			  <div><input type="file" id="filechoice" ><label for="filechoice">Choose only a .txt file of about 1000 words</label></input></div>
   		</div>
 
   		<div id="goesinmiddle">
@@ -189,7 +200,7 @@ footer {
 
 <body>
   <div class="container">
-	<div id="buffer"><div>
+	<div id="buffer2"><div>
 	  <div  id="containpre"><pre id="contents"  ></pre>
 	  </div>
 	</div> 
