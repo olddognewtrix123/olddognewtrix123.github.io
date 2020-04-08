@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<style>
+
+html {
+    /*	background:url('background.jpg') no-repeat center center; */
+    background: Gainsboro;
+    background-size:cover;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+body{
+
+}
+	
+.button{
+ border-radius: 10%;	
+}
+
+container{
+
+}
+
+#buffer {
+  background:Gainsboro; 
+  padding-top: 30px;
+}
+
+pre {  
+    white-space: normal;
+    word-wrap: break-word;
+    color: darkgrey;
+    background:Gainsboro;
+}
+
+.myHeader {
+    border-bottom:1px solid #eb7429; 
+    background:Gainsboro; 
+    color: black;
+    padding:10px 20px; 
+    position:fixed; 
+    top:0; 
+    left:0; 
+    z-index:2000; 
+    width:100%;	
+    height: 220px;
+}
+
+
+#goesontop {
+  width: 100%;
+}
+
+#goesinmiddle {
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#goesunderneath {
+  color: black;
+  vertical-align: middle;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+pre {
+  padding-top: 210px;
+  padding-bottom: 250px;
+}
+
+.big-button {
+  width: 230px;
+  height: 50px;
+  margin: 20px;
+  font-size: 22px;
+  text-align: center;
+  vertical-align: middle;
+  top:80%;
+  color: black;
+  background-color: Gainsboro;
+  border: 0;
+}
+
+.mid-button {
+  width: 230px;
+  height: 25px;
+  margin: 10px;
+  font-size: 18px;
+  text-align: center;
+  vertical-align: middle;
+  top:80%;
+  color: black;
+  background-color: Gainsboro;
+  border: 0;
+}
+
+#marker {
+  color: black;
+  background-color: Gainsboro;
+  border: 0;
+}
+
+#goal {
+  color: black;
+  background-color: Gainsboro;
+  border: 0;
+}
+
+#output {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+footer {
+   background-color: Gainsboro;
+   width: 100%;
+   bottom: 0;
+   font-size: 8;
+   color: #f4a460;
+   position: fixed;
+   height: 10%;
+ }
+
+#manageSpeed {
+  color: black;
+}
+
+#manageSpeedLeft {
+   float: left;
+   width: 35%;
+   text-align: center;
+   vertical-align: middle;
+}
+
+#manageSpeedCenter {
+  display: inline-block;
+  margin: 0 auto;
+  padding-top: 10px;
+  width: 30%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#manageSpeedRight {
+  float: right;
+  width: 35%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#message {
+ text-align: center;
+ color: grey;
+ vertical-align: middle;
+ height: 5%;
+}
+
+
+
+</style>
+
+</head>
+
+<header class = "myHeader">
+
+ 	 	<div id="goesontop">
+			  <div><button class = "button" onclick="showDirections()">Directions hello</button></div>
+			  <div id="buffer"><div>
+			  <div><input type="file" id="filechoice" ></input></div>
+  		</div>
+
+  		<div id="goesinmiddle">
+		    <input onclick="doStuff()" type="button" value="Start Scrolling" id="button1" class="big-button"></input>
+			  <input id = "marker" name = "marker" value = "0"></input>
+			  <input id = "goal" name = "goal" value = ""></input>
+  		</div>
+
+  		<div id="goesunderneath" >
+ 			  <label id = "output" >Welcome to Interval</label> 
+  		</div> 
+
+</header>
+
+<body>
+  <div class="container">
+	<div id="buffer"><div>
+	  <div  id="containpre"><pre id="contents"  ></pre>
+	  </div>
+	</div> 
+  </div>
+    
+<footer>
+	<div id="manageSpeed">
+	  <div id="manageSpeedLeft" class="btn" ><button type="button" onclick="decreaseSpeed()" class = "mid-button" value = "Decrease Speed" id = "DecreaseSpeed">Decrease Speed</button>
+        </div>
+	  <div id="manageSpeedCenter">
+        </div>
+	  <div id="manageSpeedRight" class="btn"><button type="button" onclick="increaseSpeed()" class = "mid-button" value = "Increase Speed" id = "IncreaseSpeed">Increase Speed</button>
+        </div> 
+	</div>
+	<div id="message">
+    <p>Made for readers by John Gillespie</p>
+  </div>
+</footer>
+
+<script >
+	var readSpeed = 500;     // read speed is the size of the loop interval. So the smaller the readspeed, the faster the progression
+	var stringPosition = document.getElementById('marker').value; // 'marker' shows how many words you have read
+	var tempstring = []
+	function showDirections() {
+		alert("One possible way to increase your reading speed is by training in short bursts of about a thousand words on a speed-reading device. Interval is such a device. It is set up only for (.txt) files. So, only use text (.txt) files when running Interval! This is for training in short burts of about 1000 words to increase your natural reading-speed and comprehension. Click the 'Choose File' button to select a text file from your own machine. Click on 'Start Scrolling' to  begin speed-reading. You can speed up by clicking on 'Increase Speed' to make yourself read faster. Click on 'Decrease Speed' to slow down. Click on 'Stop Scrolling' if you need to stop and just read the text. You can click 'Start Scrolling' again, or change the word index any time.");
+	}
+	function doStuff() {
+		var scrollbutton = document.getElementById("button1").value;
+		if(scrollbutton === "Start Scrolling"){
+			document.getElementById("button1").value= "Stop Scrolling";
+			stringPosition = document.getElementById('marker').value;
+			pageScroll();
+			delayedLoop();
+		}
+		else{
+			document.getElementById("button1").value= "Start Scrolling";
+			cancelTimeoutOnClick();
+	    	}
+	}
+	function pageScroll() {
+       	 	window.scrollBy(0,15); // horizontal vertical scroll increments
+       	 	scrolldelay = setTimeout('pageScroll()',readSpeed*30); // scroll every n milliseconds	
+	}
+	function decreaseSpeed() {										// decreasing speed
+		readSpeed = readSpeed + 50;
+	}
+	function increaseSpeed() {										// increasing speed - decreases readspeed by 50
+		readSpeed = readSpeed - 50;
+	}
+	function cancelTimeoutOnClick() {
+    		if (scrolldelay) {
+        		clearTimeout(scrolldelay); //connects to pageScroll()
+			clearTimeout(JohnsVar); //connects to delayedLoop()
+        		timerHandle = 0;
+    		}
+	}
+ 	var data_array=[];
+	function readSingleFile(evt) {
+		var f = evt.target.files[0];   	
+		if (f) { 
+      			var r = new FileReader("UTF-8");  
+        		r.onload = function(e) { 
+	    			var contents = e.target.result;
+				contents = contents.replace(/\uFFFD/g, '"')
+				document.getElementById('contents').textContent = contents;
+				tempstring = contents;
+				data_array = tempstring.split(' ');
+        			alert( "Import successful!" );
+				document.getElementById('goal').value = "/ " +data_array.length;  
+      				}
+			r.readAsText(f, "UTF-8");
+			}
+		else{ 
+      			alert("Failed to load file");
+    		}
+  	}
+	document.getElementById('filechoice').addEventListener('change', readSingleFile, false);
+	var JohnsVar;
+	function delayedLoop(){	
+		console.log(readSpeed.toString());	
+			document.getElementById('output').innerHTML = "";
+			console.log(data_array[stringPosition]);
+			var useme = data_array[stringPosition];
+			console.log(useme);
+			document.getElementById('output').innerHTML = useme;
+			document.getElementById('marker').value = stringPosition;
+			if(++stringPosition == data_array.length)
+				{
+					return;
+				}
+			JohnsVar = setTimeout('delayedLoop()',readSpeed);
+			var tempstringL = tempstring.length;
+			var numberoflines = tempstringL/30;	
+		}
+</script>
+	
+</body>
