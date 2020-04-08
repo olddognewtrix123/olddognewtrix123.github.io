@@ -23,22 +23,34 @@
      }
 
 	.div2 {
-	    display: none;
+	    height: 0px;
+            opacity: 0;
+	    padding: 0;
 	}
 
 	.div3 {
-	    display: none;
-	}
-    
-	#a:hover + #b {
-	    display: block;
+	    height: 0px;
+            opacity: 0;
+	    padding: 0;
 	}
 
-	div.display:hover .div2 {display: block}
-	div.display:hover .div3 {display: block}
-
-	#b:hover {
-	    display: block;
+	div.display:hover .div2 {
+	    	height: 25px;
+	        padding: 10px;
+		opacity: 1;
+  		transition: opacity 1s linear;
+  		-webkit-transition: opacity 1s linear;
+  		-moz-transition: opacity 1s linear;
+  		-o-transition: opacity 1s linear;
+	}
+	div.display:hover .div3 {
+	    	height: 25px;
+	        padding: 10px;
+		opacity: 1;
+  		transition: opacity 1s linear;
+  		-webkit-transition: opacity 1s linear;
+  		-moz-transition: opacity 1s linear;
+  		-o-transition: opacity 1s linear;
 	}
 
 	a:link {
@@ -76,7 +88,7 @@
   </div>
  <script>
 
-
  </script>
  </body>
  </html>
+
