@@ -1,19 +1,41 @@
-const FILES_TO_CACHE = [ '/offlineApp.html', ];
+const myCache = 'static-cache':
+const pageToCache = [ '/offlineApp.html' ];
 
-evt.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('[ServiceWorker] Pre-caching offline page');
-      return cache.addAll(FILES_TO_CACHE);
+self.addEventListener('install', function(event) {
+  event.waitUntil(
+    caches.open(myCache)
+    .then(function(cache) {
+      return cache.addAll(pageToCache);
     })
-);
+  );
+});
 
-evt.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== CACHE_NAME) {
-          console.log('[ServiceWorker] Removing old cache', key);
-          return caches.delete(key);
-        }
-      }));
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.match(event.request)
+    .then(function(response) {
+      return response || fetchAndCache(event.request);
     })
-);
+  );
+});
+
+function fetchAndCache(url) {
+  return fetch(url)
+  .then(function(response) {
+    // Check if we received a valid response
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return caches.open(myCache)
+    .then(function(cache) {
+      cache.put(url, response.clone());
+      return response;
+    });
+  })
+  .catch(function(error) {
+    console.log('Request failed:', error);
+    // You could return a custom offline 404 page here
+  });
+}
+
+
