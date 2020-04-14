@@ -1,4 +1,4 @@
-const myCache = 'static-cache':
+const myCache = 'static-cache';
 const pageToCache = [ '/offlineApp.html' ];
 
 self.addEventListener('install', function(event) {
