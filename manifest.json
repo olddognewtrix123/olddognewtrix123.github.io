@@ -1,6 +1,18 @@
 {
   "name": "Interval",
   "short_name": "Interval",
+  "icons": [
+    {
+      "src": "/canoe-images/192_icon.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/canoe-images/512_icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
   "start_url": "https://olddognewtrix123.github.io/Interval2.html",
   "display": "standalone",
   "background_color": "#dcdcdc",
