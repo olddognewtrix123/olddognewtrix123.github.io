@@ -225,6 +225,17 @@ footer {
 </footer>
 
 <script >
+	
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+        .then((reg) => {
+          console.log('Service worker registered.', reg);
+        });
+  });
+}
+	
+	
 	var readSpeed = 500;     // read speed is the size of the loop interval. So the smaller the readspeed, the faster the progression
 	var stringPosition = document.getElementById('marker').value; // 'marker' shows how many words you have read
 	var tempstring = []
