@@ -1,5 +1,5 @@
 <!DOCTYPE html>
- <html>   
+ <html lang="en">   
  <head>
  <title>Discourse Test Case Writer</title>
  <style>
@@ -87,15 +87,18 @@
                 Parameter filelist name: 			<!-- This is the name of the particular set of test cases - technically known as the "test case parameters list" -->
 		<div id="dataSaveToggle" style="display:none">Data saves 'onblur'</div>
                 <input type="text" name="paramFileListName" id="paramFileListName"  style="width:375px; height:30px; " readonly>
+		<label for="paramFileListName">What are the parameters?</label>
                 <br><br>
 		<p>What is the requirement?: </p>			<!-- This is the name of the particular set of test cases - technically known as the "test case parameters list" -->
-                <input type="text" name="req"  id="req" onblur = "saveData()" style=" color: black; width:550px; height:60px; border:0px" 
+                <input type="text" name="req"  id="req" onblur = "saveData()" style=" color: black; width:550px; height:60px; border:0px" >
+		<label for="req">What are the requirements?</label>
             </form>
 
             <!-- Roles -->
 	    <form>
 	    <p >What system roles does this requirement affect?: </p>
 	    <input type="text" name="role" id="role"  style=" color: black; width:550px; border:0px"> 
+	    <label for="role">What are the roles?</label>
 	    </form>
 	    <button onclick="addRole()" id = "addRole"  style="height:25px; width: 150px; background-color:#dcdcdc;color: black" >Add Role</button>
 	    <br><br>
