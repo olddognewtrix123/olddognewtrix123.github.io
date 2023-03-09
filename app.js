@@ -92,15 +92,29 @@ function clearUrls() {
 }
 
 function openAllUrls() {
-    const urlList = document.getElementById("urlList");
-    const urls = urlList.getElementsByTagName("li");
-    let counter = 1;
-    for (let i = 0; i < urls.length; i++) {
-        const url = urls[i].innerText;
-        const targetName = '_blank' + i;
-        window.open(url, targetName);
-        counter++;
-    }
+//    const urlList = document.getElementById("urlList");
+//    const urls = urlList.getElementsByTagName("li");
+//    let counter = 1;
+//	for (let i = 0; i < urls.length; i++) {
+//        const url = urls[i].innerText;
+//        const targetName = '_blank' + i;
+//        window.open(url, targetName);
+//        counter++;
+//    }
+	
+    const transaction = db.transaction([storeName], "readonly");
+    const objectStore = transaction.objectStore(storeName);
+    objectStore.openCursor().onsuccess = function(event) {
+	const cursor = event.target.result;
+	let counter = 1;
+	if (cursor) {
+			const url = cursor.value.url;
+			const targetName = '_blank' + counter;
+		        window.open(url, targetName);
+			counter++;
+			cursor.continue();
+	}
+   }; 
 }
 
 
