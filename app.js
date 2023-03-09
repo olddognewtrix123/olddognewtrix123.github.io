@@ -91,10 +91,10 @@ function clearUrls() {
 	};
 }
 
-function openAllUrls() {
-  const transaction = db.transaction([storeName], "readonly");
-  const objectStore = transaction.objectStore(storeName);
-  objectStore.openCursor().onsuccess = function(event) {
+//function openAllUrls() {
+//  const transaction = db.transaction([storeName], "readonly");
+//  const objectStore = transaction.objectStore(storeName);
+//  objectStore.openCursor().onsuccess = function(event) {
     const cursor = event.target.result;
     if (cursor) {
       const url = cursor.value.url;
@@ -103,6 +103,25 @@ function openAllUrls() {
       link.target = '_blank';
       document.body.appendChild(link);
       link.click();
+      cursor.continue();
+    }
+  };
+}
+
+function openAllUrls() {
+  const transaction = db.transaction([storeName], "readonly");
+  const objectStore = transaction.objectStore(storeName);
+  objectStore.openCursor().onsuccess = function(event) {
+    const cursor = event.target.result;
+    count = 1;
+    if (cursor) {
+      const url = cursor.value.url;
+      const link = document.createElement('a');
+      link.href = url;
+      document.body.appendChild(link);
+      targetName = '_blank' + counter;
+      window.open(url, targetName);
+      counter = counter + 1;
       cursor.continue();
     }
   };
