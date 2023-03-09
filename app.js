@@ -91,22 +91,7 @@ function clearUrls() {
 	};
 }
 
-//function openAllUrls() {
-//  const transaction = db.transaction([storeName], "readonly");
-//  const objectStore = transaction.objectStore(storeName);
-//  objectStore.openCursor().onsuccess = function(event) {
-    const cursor = event.target.result;
-    if (cursor) {
-      const url = cursor.value.url;
-      const link = document.createElement('a');
-      link.href = url;
-      link.target = '_blank';
-      document.body.appendChild(link);
-      link.click();
-      cursor.continue();
-    }
-  };
-}
+
 
 function openAllUrls() {
   const transaction = db.transaction([storeName], "readonly");
