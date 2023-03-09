@@ -82,20 +82,16 @@ displayUrls();
 }
 
 
-function openAllUrls(){
-    const transaction = db.transaction([storeName], "readonly");
-    const objectStore = transaction.objectStore(storeName);
-    let counter = 1; // Initialize a counter
-    objectStore.openCursor().onsuccess = function(event) {
-        const cursor = event.target.result;
-        if (cursor) {
-            const url = cursor.value.url;
-            const targetName = '_blank' + counter; // Generate a unique target name
-            window.open(url, targetName);
-            counter++; // Increment the counter
-            cursor.continue();
-        }
-    };
+function openAllUrls() {
+    const urlList = document.getElementById("urlList");
+    const urls = urlList.getElementsByTagName("li");
+    let counter = 1;
+    for (let i = 0; i < urls.length; i++) {
+        const url = urls[i].innerText;
+        const targetName = '_blank' + counter;
+        window.open(url, targetName);
+        counter++;
+    }
 }
 
 
