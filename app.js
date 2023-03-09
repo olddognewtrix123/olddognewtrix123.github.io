@@ -91,20 +91,21 @@ function clearUrls() {
 	};
 }
 
-function openAllUrls(){
-    const transaction = db.transaction([storeName], "readonly");
-    const objectStore = transaction.objectStore(storeName);
-    let counter = 1; // Initialize a counter
-    objectStore.openCursor().onsuccess = function(event) {
-        const cursor = event.target.result;
-        if (cursor) {
-            const url = cursor.value.url;
-            const targetName = '_blank' + counter; // Generate a unique target name
-            window.open(url, targetName);
-            counter++; // Increment the counter
-            cursor.continue();
-        }
-    };
+function openAllUrls() {
+  const transaction = db.transaction([storeName], "readonly");
+  const objectStore = transaction.objectStore(storeName);
+  objectStore.openCursor().onsuccess = function(event) {
+    const cursor = event.target.result;
+    if (cursor) {
+      const url = cursor.value.url;
+      const link = document.createElement('a');
+      link.href = url;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      cursor.continue();
+    }
+  };
 }
 
 // Clear the list of URLs from the database
