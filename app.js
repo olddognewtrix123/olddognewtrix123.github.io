@@ -98,7 +98,7 @@ function openAllUrls() {
   const objectStore = transaction.objectStore(storeName);
   objectStore.openCursor().onsuccess = function(event) {
     const cursor = event.target.result;
-    count = 1;
+    counter = 1;
     if (cursor) {
       const url = cursor.value.url;
       const link = document.createElement('a');
