@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>URL Manager</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#4285f4">
+	<link rel="manifest" href="manifest.json">
+	<link rel="apple-touch-icon" href="pimoy.png">
+
+	<script src="app.js"></script>
+	<script>
+	if ('serviceWorker' in navigator) {
+	window.addEventListener('load', () => {
+		navigator.serviceWorker.register('./sw.js')
+		.then(registration => console.log('Service worker registered'))
+		.catch(error => console.error('Error registering service worker:', error));
+	});
+	}
+</script>
+
+</head>
+<body>
+	<h1>URL Manager</h1>
+	<div>
+		<label for="urlInput">Enter URL:</label>
+		<input type="text" id="urlInput">
+		<button onclick="addUrl()">Add URL</button>
+	</div>
+	<div id="urlList"></div>
+	<button onclick="openAllUrls()">Open All URLs</button>
+</body>
+</html>
