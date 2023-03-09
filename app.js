@@ -91,31 +91,32 @@ function clearUrls() {
 	};
 }
 
-function openAllUrls() {
-//    const urlList = document.getElementById("urlList");
-//    const urls = urlList.getElementsByTagName("li");
-//    let counter = 1;
-//	for (let i = 0; i < urls.length; i++) {
-//        const url = urls[i].innerText;
-//        const targetName = '_blank' + i;
-//        window.open(url, targetName);
-//        counter++;
-//    }
-	
+function openAllUrls(){
     const transaction = db.transaction([storeName], "readonly");
     const objectStore = transaction.objectStore(storeName);
+    let counter = 1; // Initialize a counter
     objectStore.openCursor().onsuccess = function(event) {
-	const cursor = event.target.result;
-	let counter = 1;
-	if (cursor) {
-			const url = cursor.value.url;
-			const targetName = '_blank' + counter;
-		        window.open(url, targetName);
-			counter++;
-			cursor.continue();
-	}
-   }; 
+        const cursor = event.target.result;
+        if (cursor) {
+            const url = cursor.value.url;
+            const targetName = '_blank' + counter; // Generate a unique target name
+            window.open(url, targetName);
+            counter++; // Increment the counter
+            cursor.continue();
+        }
+    };
 }
+
+// Clear the list of URLs from the database
+function clearUrls() {
+	const transaction = db.transaction([storeName], "readwrite");
+	const objectStore = transaction.objectStore(storeName);
+	const request = objectStore.clear();
+	request.onsuccess = function(event) {
+		displayUrls();
+	};
+}
+
 
 
 
