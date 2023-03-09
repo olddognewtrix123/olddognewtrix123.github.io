@@ -81,6 +81,15 @@ displayUrls();
 };
 }
 
+// Clear the list of URLs from the database
+function clearUrls() {
+	const transaction = db.transaction([storeName], "readwrite");
+	const objectStore = transaction.objectStore(storeName);
+	const request = objectStore.clear();
+	request.onsuccess = function(event) {
+		displayUrls();
+	};
+}
 
 function openAllUrls() {
     const urlList = document.getElementById("urlList");
