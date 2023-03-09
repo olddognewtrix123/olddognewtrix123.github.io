@@ -97,7 +97,7 @@ function openAllUrls() {
     let counter = 1;
     for (let i = 0; i < urls.length; i++) {
         const url = urls[i].innerText;
-        const targetName = '_blank' + counter;
+        const targetName = '_blank' + i;
         window.open(url, targetName);
         counter++;
     }
